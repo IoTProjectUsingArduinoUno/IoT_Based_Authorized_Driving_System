@@ -1,8 +1,7 @@
 
 #include <ESP8266WiFi.h>
-#include "ThingSpeak.h"  // always include thingspeak header file after other header files and custom macros
-
-const char* ssid = "i'm single!";
+#include "ThingSpeak.h"  // always include thingspeak header file after other header files
+const char* ssid = "";// your network ssid
 const char* password = "";  // your network password
 int keyIndex = 0;           // your network key Index number (needed only for WEP)
 WiFiClient client;
@@ -19,7 +18,7 @@ void setup() {
   Serial.begin(9600);  // Initialize serial
   while (!Serial) {
     Serial.println(".");
-    delay(50);  // wait for serial port to connect. Needed for Leonardo native USB port only
+    delay(50);
   }
   Serial.println("23");
   WiFi.mode(WIFI_STA);
@@ -47,9 +46,6 @@ check1:
       ;
     dataToSend = Serial.readString();
   }
-
-  // Write to ThingSpeak. There are up to 8 fields in a channel, allowing you to store up to 8 different
-  // pieces of information in a channel.  Here, we write to field 1.
   int x;
   goto check;
 check:
@@ -57,9 +53,7 @@ check:
   else goto check1;
   while (x != 200) {
     goto check;
-    ///Serial.println("Channel update successful.");
   }
-  //Serial.println("Problem updating channel. HTTP error code " + String(x));
   delay(30000);
   goto check2;
 check2:
@@ -76,6 +70,4 @@ check2:
     if (isvalid == "valid") digitalWrite(4, HIGH);
     else digitalWrite(4, LOW);
   }
-  //Serial.flush();
-  //delay(15000);// No need to read the counter too often.
 }
