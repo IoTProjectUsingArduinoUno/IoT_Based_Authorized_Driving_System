@@ -4,15 +4,9 @@
 #define SS_PIN 10  //SS or the slave select pin, which can be changed to another digital pin if needed.
 MFRC522 mfrc522(SS_PIN, RST_PIN);  // create a MFRC522 instant.
 MFRC522::MIFARE_Key key;          //create a MIFARE_Key struct named 'key' to hold the card information
-byte data1[12] = {"hemanth"};  //The first data that needs to be written to the tag.
-byte data2[19] = {"100,101,102,103,104"};
-byte data3[7]={"person2"};
-/*byte data3[3] = {"106"};
-byte data4[3] = {"107"};
-byte data5[3] = {"108"};
-byte data6[3] = {"109"};*/
-//byte data2[1] = {"6"};  //The second data that needs to be written to the tag.
-
+byte data1[12] = {"licence holder name"};  //The first data that needs to be written to the tag.
+byte data2[19] = {"finger memory locations from fp sensor(index values"};
+byte data3[7]={"licence id"};
 byte readbackblock[18];  //Array for reading out a block.
 void setup()
 {
@@ -40,13 +34,8 @@ void loop()
   writeBlock(1, data1); //write data1 to the block 1 of the tag
   writeBlock(2, data2); //write data2 to the block 2 of the tag
   writeBlock(4,data3);
-  /*writeBlock(4, data3); 
-  writeBlock(5, data4); 
-  writeBlock(6, data5);
-  writeBlock(8, data6);  */
   Serial.println("reading data from the tag");
   readBlock(1, readbackblock);   //read block 1
-  //print data
   Serial.print("read block 1: ");
   for (int j = 0 ; j < 14 ; j++)
   {
@@ -54,15 +43,11 @@ void loop()
   }
   Serial.println("");
   readBlock(2, readbackblock);  //read block 2
-  //print data
   Serial.print("read block 2: ");
-  //String tagid="";
   for (int j = 0 ; j < 19 ; j++)
   {
     Serial.write(readbackblock[j]);
   }
-  //Serial.println(tagid);
-
   mfrc522.PICC_DumpToSerial(&(mfrc522.uid));//uncomment below line if want to see the entire memory dump.
 }
 //Write specific block
@@ -85,7 +70,6 @@ int writeBlock(int blockNumber, byte arrayAddress[])
   }
   //writing data to the block
   status = mfrc522.MIFARE_Write(blockNumber, arrayAddress, 16);
-  //status = mfrc522.MIFARE_Write(9, value1Block, 16);
   if (status != MFRC522::STATUS_OK) {
     Serial.print("Data write failed: ");
     Serial.println(mfrc522.GetStatusCodeName(status));
