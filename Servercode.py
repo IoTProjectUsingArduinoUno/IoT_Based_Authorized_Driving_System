@@ -18,10 +18,10 @@ for blob in blobs:
   if blob.name.endswith("/"):
     fn.add(blob.name.rstrip("/"))
 #thingspeak initialization
-channel_id = '2387955'
-write_api_key = '9SWKGXJKT3KYZWDO'
-thingspeak_read_url = "https://api.thingspeak.com/channels/2387955/feeds.json?results=1"
-thingspeak_write_url = "https://api.thingspeak.com/update?api_key=9SWKGXJKT3KYZWDO&field3="
+channel_id = '*******'//replace it with your channel id
+write_api_key = '*********'//replace it with yor write_api_key
+thingspeak_read_url = "https://api.thingspeak.com/channels/******/feeds.json?results=1"
+thingspeak_write_url = "https://api.thingspeak.com/update?api_key=*********&field3="
 def check_thingspeak(feedno):
     try:
         response = requests.get(thingspeak_read_url)
