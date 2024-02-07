@@ -5,13 +5,9 @@ from io import BytesIO
 import numpy as np
 import requests
 import time
-#from google.colab import drive
-#drive.mount('/content/drive')
-#from flask import Flask
-#app = Flask(__name__)
 # Initialize Firebase
-cred = credentials.Certificate("dlfpdb-firebase-adminsdk-y3fdt-0d7872bf79.json")
-firebase_admin.initialize_app(cred, {"storageBucket": "dlfpdb.appspot.com"})
+cred = credentials.Certificate("place your certificate path")
+firebase_admin.initialize_app(cred, {"storageBucket": "bucket link "})
 fn=set()
 blobs = storage.bucket().list_blobs()
 for blob in blobs:
@@ -20,8 +16,8 @@ for blob in blobs:
 #thingspeak initialization
 channel_id = '*******'//replace it with your channel id
 write_api_key = '*********'//replace it with yor write_api_key
-thingspeak_read_url = "https://api.thingspeak.com/channels/******/feeds.json?results=1"
-thingspeak_write_url = "https://api.thingspeak.com/update?api_key=*********&field3="
+thingspeak_read_url = "replace with your buffer url"
+thingspeak_write_url = "replace with your buffer url"
 def check_thingspeak(feedno):
     try:
         response = requests.get(thingspeak_read_url)
@@ -31,8 +27,6 @@ def check_thingspeak(feedno):
     except Exception as e:
         print("Error:", e)
         return None
-#@app.route("/verify/<idnum>")
-#def isvalidfinger(idnum:str,fingerimage:np.ndarray)->bool:
 def isvalidfinger():
   while(check_thingspeak(4)!="verified"):
     idnum=str(check_thingspeak(1))
@@ -82,5 +76,3 @@ def isvalidfinger():
 while(True):
   isvalidfinger()
   time.sleep(5)
-#if __name__=='__main__':
-#   app.run(debug=True)
