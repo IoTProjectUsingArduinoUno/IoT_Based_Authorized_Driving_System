@@ -1,0 +1,30 @@
+esp8266 connections:
+reset----->button------->gnd(use 3.3v power supply at reset pin wire before connecting to button)
+ch_pc----->3.3v
+vcc------->3.3v
+TXD------->TXD(UNO) if used to dump code else: 4
+RXD------->RXD(UNO) if used to dump code else: 5
+GPIO00---->GND if used to dump code else:OPEN
+GND------->GND
+GPIO15---->GND
+============================================================
+mfrc connection:
+3.3v------>3.3v
+RST------->9(UNO)
+GND------->GND
+MOSI------>11(UNO)
+MISO------>12(UNO)
+SCK------->13(UNO)
+SDA------->10(UNO)
+
+=============================================================
+r307 connections:
+redwire---->5v
+blackwire-->GND
+yellow----->2(UNO)
+green------>3(UNO)
+=============================================================
+relay connections:
+(+)-------->5v
+(-)-------->GND
+Signalpin-->GPIO04(esp)&&D8(UNO)
